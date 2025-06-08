@@ -9,10 +9,12 @@ import SinglePostPage from "./pages/users/SinglePostPage";
 import PostsListPage from "./pages/users/PostListPage";
 import HomePage from "./pages/users/HomePage";
 import Footer from "./pages/users/Footer";
+import Navbar from "./pages/admin/Navbar";
 
 function App() {
   return (
     <Router>
+      <Navbar /> 
       <Routes>
       <Route path="/loginPage" element={<LoginPage />} />
       <Route path="/dashboard" element={<Dashboard />} />
