@@ -6,26 +6,54 @@
     align-items: center;
     justify-content: center;
     background: #d5c0e0;
-    border: 1px solid black;
     border-radius: 10px;
-    padding: 40px;
+    padding-top: 10rem;
     width: fit-content;
+    padding-top: 90px;
+    min-height: 100vh;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    box-sizing: border-box;
+    background-color: var(--background-color);
   }
   
+  .create-post-form {
+  background-color: var(--card-background);
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
+}
+
   /* Styling for inputs and textarea */
   .create-post-container input,
   .create-post-container textarea {
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    background-color: white;
+    color: var(--text-primary);
     box-sizing: border-box;
+    font-family: inherit;
   }
   
   .create-post-container textarea {
-    height: 150px; /* Specific height for the content area */
-    resize: none;
+    min-height: 250px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+  
+  .create-post-container input:focus,
+  .create-post-container textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
   }
   
   /* Checkbox and label styling */
@@ -40,33 +68,77 @@
     margin-right: -150px;
   }
   
+  .publish-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding: 0.5rem 0;
+}
+
+.publish-checkbox input[type="checkbox"] {
+  width: 1.125rem;
+  height: 1.125rem;
+  margin: 0;
+  accent-color: var(--primary-color);
+  cursor: pointer;
+}
+
+.publish-checkbox label {
+  margin: 0;
+  cursor: pointer;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+  
   /* Button styling */
   .create-post-container button {
-    background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
+    width: 100%;
+    padding: 0.875rem;
+    background-color: var(--primary-color);
     color: white;
-    padding: 10px 20px;
-    margin-top: 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
     cursor: pointer;
-    font-size: 20px;
-    font-weight: 700;
+    transition: all 0.2s ease;
+    margin-top: 2rem;
   }
   
   .create-post-container button:hover {
-    background-color: #b6363e;
+    background-color: var(--hover-color);
+    transform: translateY(-1px);
   }
   
-  /* Heading styling */
+  .create-post-container button:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+  transform: none;
+}
+
+  .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+  .create-post-container {
+    padding: 80px 1rem 2rem;
+  }
+
+  .create-post-form {
+    padding: 1.5rem;
+  }
+
   .create-post-container h1 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 800;
-    font-size: 50px;
+    font-size: 1.75rem;
   }
-  
+}

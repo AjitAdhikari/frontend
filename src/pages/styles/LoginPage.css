@@ -1,55 +1,154 @@
 body {
-    display: grid;
-    place-items: center; /* Centers the div horizontally and vertically */
-    min-height: 100vh; /* Ensures the grid container takes up the full viewport height */
-    /* background: linear-gradient(to right, #f12711, #f5af19); */
-
+    background-color: var(--background-color);
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
 }
+
 .main-div {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: white;
-    border: 1px solid black;
-    border-radius: 5%;
-    width: fit-content;
-    height: max-content;
-    padding: 20px 40px;
+    min-height: 100vh;
+    padding: 2rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.title {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.title h2 {
+  font-size: 2rem;
+  color: var(--text-color);
+  font-weight: 600;
+  letter-spacing: -0.025em;
 }
 
 .main-div h2{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 800;
-    font-size: 50px;
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+}
+
+hr {
+  width: 100%;
+  max-width: 400px;
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 1rem 0 2rem 0;
 }
 
 .main-div form{
-    display: grid;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
+    width: 100%;
+    max-width: 400px;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin: 0 auto; /* Center the form */
+}
+
+.main-div form div {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 0.95rem;
 }
 
 .main-div form label{
-    font-size: 18px;
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.main-div form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.main-div form input:focus {
+    outline: none;
+    border-color: #5a67d8;
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .main-div form button{
-    background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
-    font-size: 20px;
-    font-weight: 800;
+    width: 100%;
+    padding: 10px;
+    background-color: #5a67d8;
     color: white;
-    padding: 10px 20px;
-    margin-top: 20px;
     border: none;
     border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    margin-top: 20px;
+}
+
+button:hover:not(:disabled) {
+  background-color: var(--hover-color);
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+}
+
+.main-div form button:hover {
+    background-color: #434cb1;
+}
+
+.main-div form button:disabled {
+    background-color: #a3aed0;
+    cursor: not-allowed;
 }
 
 .register-link{
@@ -68,4 +167,41 @@ body {
     font-size: 18px;
     border-radius: 7%;
     font-weight: 500;
+}
+
+p {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #333;
+}
+
+p a {
+    color: #5a67d8;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+p[style*="color: red"] {
+  color: var(--error-color) !important;
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 640px) {
+  .main-div {
+    padding: 1rem;
+  }
+
+  form {
+    padding: 1.5rem;
+  }
+
+  .title h2 {
+    font-size: 1.75rem;
+  }
 }

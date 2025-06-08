@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import { BiSend, BiShare, BiCheck, BiArrowBack, BiTrash } from 'react-icons/bi';
 import '../styles/singlePostPage.css';
 
 const SinglePostPage = () => {
@@ -9,7 +10,8 @@ const SinglePostPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [comments, setComments] = useState([]);
-  const [commentContent, setCommentContent] = useState(''); // State for comment input
+  const [commentContent, setCommentContent] = useState('');
+  const [shareSuccess, setShareSuccess] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,6 +24,7 @@ const SinglePostPage = () => {
         });
         setPost(response.data);
 
+        // Fetch comments for the post
         const commentsResponse = await axios.get(`${process.env.REACT_APP_API_URL}/api/comments/${postId}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -46,25 +49,79 @@ const SinglePostPage = () => {
   };
 
   const handleAddComment = async () => {
+    if (!commentContent.trim()) return;
+
     try {
-      await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/comments/${postId}`,
-        { content: commentContent },
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/comments/add`,
+        { 
+          content: commentContent,
+          postId: parseInt(postId) // Convert postId to integer since it comes from URL params
+        },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         }
       );
-      setComments([...comments, { content: commentContent, username: localStorage.getItem('username') }]); // Update comments state
-      setCommentContent(''); // Clear comment input
+
+      // Update comments array with the new comment
+      const newComment = {
+        ...response.data,
+        username: localStorage.getItem('username'), // Add username to match comment display
+        userId: localStorage.getItem('userId') // Add userId for delete functionality
+      };
+      
+      setComments(prevComments => [...prevComments, newComment]);
+      setCommentContent(''); // Clear input
     } catch (err) {
+      console.error('Error adding comment:', err);
       setError(err.response?.data?.error || 'Failed to add comment');
     }
   };
 
   const handleBackToPosts = () => {
     navigate('/posts'); // Navigate back to the posts list
+  };
+
+  // Add share functionality
+  const handleShare = async () => {
+    const shareData = {
+      title: post.title,
+      text: `Check out this post: ${post.title}`,
+      url: window.location.href
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else {
+        await navigator.clipboard.writeText(shareData.url);
+        setShareSuccess(true);
+        setTimeout(() => setShareSuccess(false), 2000);
+      }
+    } catch (err) {
+      console.error('Error sharing:', err);
+    }
+  };
+
+  // Add handleDeleteComment function
+  const handleDeleteComment = async (commentId) => {
+    try {
+      await axios.delete(
+        `${process.env.REACT_APP_API_URL}/api/comments/delete/${commentId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      );
+
+      // Update comments array after deletion
+      setComments(comments.filter(comment => comment.id !== commentId));
+    } catch (err) {
+      setError(err.response?.data?.error || 'Failed to delete comment');
+    }
   };
 
   if (loading) return <p>Loading...</p>;
@@ -76,37 +133,69 @@ const SinglePostPage = () => {
 
   return (
     <div className="single-post">
-      <h1>{post.title}</h1>
-      <p>{post.content}</p>
-      {post.author && (
-        <p><strong>Author:</strong> {post.author.username}</p>
-      )}
-
-      <h3>Add a Comment:</h3>
-      <div className="comment-input">
-        <input
-          type="text"
-          value={commentContent}
-          onChange={handleCommentChange}
-          placeholder="Add a comment"
-        />
-        <button onClick={handleAddComment} disabled={!commentContent.trim()}>
-          Add Comment
+      <div className="post-header">
+        <button className="back-to-posts" onClick={handleBackToPosts}>
+          <BiArrowBack />
+          <span>Back to Posts</span>
         </button>
       </div>
 
-      <h3>Comments:</h3>
-      <ul className="comments-list">
-        {comments.map(comment => (
-          <li key={comment.id}>
-            <p><strong>{comment.username}:</strong> {comment.content}</p>
-          </li>
-        ))}
-      </ul>
-      {/* Back to Posts button */}
-      <button className="back-to-posts" onClick={handleBackToPosts}>
-        Back to Posts
-      </button>
+      <h1>{post.title}</h1>
+      <div className="post-metadata">
+        <span>By {post.author?.username}</span>
+        <span>•</span>
+        <span>{new Date(post.createdAt).toLocaleDateString()}</span>
+      </div>
+
+      <div className="post-content">
+        <p>{post.content}</p>
+      </div>
+
+      <div className="comment-section">
+        <div className="comment-section-header">
+          <h3>Comments</h3>
+          <button className="share-button" onClick={handleShare}>
+            {shareSuccess ? <BiCheck /> : <BiShare />}
+          </button>
+        </div>
+
+        <div className="comment-input">
+          <input
+            type="text"
+            value={commentContent}
+            onChange={handleCommentChange}
+            placeholder="Add your comment..."
+          />
+          <button
+            onClick={handleAddComment}
+            disabled={!commentContent.trim()}
+            title="Add comment"
+          >
+            <BiSend size={20} />
+          </button>
+        </div>
+
+        <div className="comments-list">
+          {comments.map(comment => (
+            <div key={comment.id} className="comment">
+              <div className="comment-content-wrapper">
+                <span className="comment-author">{comment.username}</span>
+                <p className="comment-content">{comment.content}</p>
+              </div>
+              {(localStorage.getItem('userId') === comment.userId || 
+                localStorage.getItem('role') === 'AUTHOR') && (
+                <button 
+                  className="delete-comment-btn"
+                  onClick={() => handleDeleteComment(comment.id)}
+                  title="Delete comment"
+                >
+                  <BiTrash />
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,55 +1,200 @@
+/* Base styling for the body */
+body {
+  background-color: #f8f9fa; /* Light grey background */
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 /* Container to center the form */
 .register-form-container {
-    margin: 5% auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: white;
-    border: 1px solid black;
-    border-radius: 10px;
-    padding: 40px;
-    width: fit-content;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.register-form-container h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+}
+
+form {
+  margin-top: 20px;
+}
+
+form div {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: #f9f9f9;
+  margin-bottom: 15px;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #5a67d8;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #5a67d8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #434cb1;
+}
+
+button:disabled {
+  background-color: #a3aed0;
+  cursor: not-allowed;
+}
+
+:root {
+  --primary-color: #2563eb;
+  --background-color: #f8fafc;
+  --text-color: #1e293b;
+  --accent-color: #3b82f6;
+  --hover-color: #1d4ed8;
+  --error-color: #ef4444;
+  --border-color: #e2e8f0;
+}
+
+.main-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--background-color);
+}
+
+.title {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.title h2 {
+  font-size: 2rem;
+  color: var(--text-color);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+
+hr {
+  width: 100%;
+  max-width: 400px;
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 1rem 0 2rem 0;
+}
+
+form {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+form > div {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1em;
+  padding-right: 2.5rem;
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background-color: var(--hover-color);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 640px) {
+  .main-div {
+    padding: 1rem;
   }
-  
-  /* Styling for inputs */
-  .register-form-container input,
-  .register-form-container select {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
+
+  form {
+    padding: 1.5rem;
   }
-  
-  /* Button styling */
-  .register-form-container button {
-    background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
-    font-size: 20px;
-    font-weight: 800;
-    color: white;
-    padding: 10px 20px;
-    margin-top: 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+
+  .title h2 {
+    font-size: 1.75rem;
   }
-  
-  .register-form-container button:hover {
-    background-color: #f64f59;
-  }
-  
-  /* Heading styling */
-  .register-form-container h1 {
-    text-align: center;
-    color: white;
-    margin-bottom: 20px;
-    font-weight: 800;
-    font-size: 50px;
-    background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  
+}

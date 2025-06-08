@@ -54,31 +54,47 @@ const UpdatePostPage = () => {
 
   return (
     <div className="update-post-container">
-  <h1>Update Post</h1>
-  {error && <p>{error}</p>}
-  <form onSubmit={handleUpdate}>
-    <input
-      type="text"
-      value={title}
-      onChange={(e) => setTitle(e.target.value)}
-      placeholder="Title"
-    />
-    <textarea
-      value={content}
-      onChange={(e) => setContent(e.target.value)}
-      placeholder="Content"
-    />
-    <label>
-      <input
-        type="checkbox"
-        checked={published}
-        onChange={(e) => setPublished(e.target.checked)}
-      />
-      Published
-    </label>
-    <button type="submit">Update</button>
-  </form>
-</div>
+      <div className="update-post-form">
+        <h1>Update Post</h1>
+        {error && <p>{error}</p>}
+        <form onSubmit={handleUpdate}>
+          <div className="form-group">
+            <label htmlFor="title">Title</label>
+            <input
+              id="title"
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="content">Content</label>
+            <textarea
+              id="content"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="publish-checkbox">
+            <input
+              type="checkbox"
+              id="published"
+              checked={published}
+              onChange={(e) => setPublished(e.target.checked)}
+            />
+            <label htmlFor="published">Published</label>
+          </div>
+
+          <button type="submit">
+            Update Post
+          </button>
+        </form>
+      </div>
+    </div>
   );
 };
 

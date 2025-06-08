@@ -4,15 +4,17 @@ import '../styles/homePage.css';
 const HomePage = () => {
   return (
     <div className="home-container">
-      <h1>Welcome to My Blog</h1>
-      <p>Please log in or register to continue.</p>
-      <div className="home-buttons">
-        <Link to="/loginPage">
-          <button className="login-button">Login</button>
-        </Link>
-        <Link to="/register">
-          <button className="register-button">Register</button>
-        </Link>
+      <div className="home-content">
+        <h1>Welcome to NikitaBlogs</h1>
+        <p>Join our community of developers sharing knowledge and experiences. Sign in to start reading or create your own stories.</p>
+        <div className="home-buttons">
+          <Link to="/loginPage">
+            <button className="login-button">Sign In</button>
+          </Link>
+          <Link to="/register">
+            <button className="register-button">Create Account</button>
+          </Link>
+        </div>
       </div>
     </div>
   );

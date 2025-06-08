@@ -1,34 +1,87 @@
-.home-container h1{
-    background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 800;
-    font-size: 50px;
-}
-.home-container p{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    font-style: italic;
-    font-weight: 500;
+
+.home-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background-color);
+  padding: 2rem;
+  text-align: center;
 }
 
-.login-button, .register-button{
-    background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
-    border: none;
-    padding: 10px 10px;
-    font-size: 18px;
-    color: white;
-    margin-right: 20px;
-    border-radius: 5%;
+.home-container h1 {
+  font-size: 2.5rem;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.home-container p {
+  font-size: 1.1rem;
+  color: #64748b;
+  margin-bottom: 2rem;
+  max-width: 500px;
+  line-height: 1.6;
 }
 
 .home-buttons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.home-buttons button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.login-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+}
+
+.login-button:hover {
+  background-color: var(--hover-color);
+  transform: translateY(-1px);
+}
+
+.register-button {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+}
+
+.register-button:hover {
+  background-color: var(--primary-color);
+  color: white;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 640px) {
+  .home-container h1 {
+    font-size: 2rem;
+  }
+
+  .home-container p {
+    font-size: 1rem;
+  }
+
+  .home-buttons {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .home-buttons button {
+    width: 100%;
+  }
 }
 
