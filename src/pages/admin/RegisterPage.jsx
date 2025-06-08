@@ -29,17 +29,24 @@ const RegisterPage = () => {
         {
           headers: {
             'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          }
+          },
+          withCredentials: true
         }
       );
 
       if (response.data) {
+        console.log('Registration successful:', response.data);
         navigate('/loginPage');
       }
     } catch (err) {
-      console.error('Registration error:', err.response?.data || err.message);
-      setError(err.response?.data?.error || 'Registration failed. Please try again.');
+      console.error('Full error:', err);
+      console.error('Response data:', err.response?.data);
+      console.error('Response status:', err.response?.status);
+      setError(
+        err.response?.data?.message || 
+        err.response?.data?.error || 
+        'Registration failed. Please try again.'
+      );
     } finally {
       setLoading(false);
     }
