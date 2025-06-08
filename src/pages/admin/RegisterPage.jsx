@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/RegisterPage.css';
 
@@ -7,22 +8,40 @@ const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('USER'); // Default role
-  
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setError('');
+    setLoading(true);
+
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/users/register`, {
-        username,
-        email,
-        password,
-        role
-      });
-      console.log('User registered:', response.data);
-      // Redirect or show a success message
-      window.location.href = '/';
-    } catch (error) {
-      console.error('Error registering user:', error);
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/users/register`,
+        {
+          username,
+          email,
+          password,
+          role
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        }
+      );
+
+      if (response.data) {
+        navigate('/loginPage');
+      }
+    } catch (err) {
+      console.error('Registration error:', err.response?.data || err.message);
+      setError(err.response?.data?.error || 'Registration failed. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -32,6 +51,7 @@ const RegisterPage = () => {
         <h2>Create an Account</h2>
       </div>
       <hr />
+      {error && <div className="error-message">{error}</div>}
       <form onSubmit={handleRegister}>
         <div>
           <label htmlFor="username">Username</label>
@@ -77,7 +97,9 @@ const RegisterPage = () => {
             <option value="AUTHOR">Author</option>
           </select>
         </div>
-        <button type="submit">Create Account</button>
+        <button type="submit" disabled={loading}>
+          {loading ? 'Creating Account...' : 'Create Account'}
+        </button>
       </form>
     </div>
   );
