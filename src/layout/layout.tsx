@@ -23,7 +23,7 @@ export default function Layout() {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main className="flex flex-col min-h-screen w-full bg-gray-50/50">
+      <main className="flex flex-col min-h-screen w-full bg-gray-50/50 relative">
         <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-white px-6 shadow-sm">
           {/* Role Badge - Moved to Left */}
           <div className="hidden md:flex items-center gap-2 rounded-full bg-blue-100 px-4 py-1.5 text-xs font-semibold text-blue-600 border border-blue-200 shadow-sm">

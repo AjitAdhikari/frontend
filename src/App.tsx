@@ -9,7 +9,7 @@ import AuthLayout from "./layout/authlayout";
 import AdminProtectedRoute from "./routes/adminProtected.route";
 import GlobalProtectedRoute from "./routes/globalProtected.route";
 import PublicRoute from "./routes/public.route";
-import { assignmentRoutes, caregiverRoutes, consumerRoutes, insuranceProviderRoutes, locationRoutes, reportRoutes, userRoutes, workLogRoutes } from "./routes/routes";
+import { caregiverRoutes, consumerRoutes, reportRoutes, userRoutes, workLogRoutes, cityManagementRoutes } from "./routes/routes";
 
 const LoginForm = lazy(() => import("./auth/login"));
 const Dashboard = lazy(() => import("./pages/dashboard/dashboard"));
@@ -53,13 +53,11 @@ const adminOnlyRoutes: any[] = [
         element: withSuspense(Dashboard),
       },
       ...userRoutes,
-      ...locationRoutes,
       ...caregiverRoutes,
-      ...insuranceProviderRoutes,
       ...workLogRoutes,
       ...consumerRoutes,
-      ...assignmentRoutes,
-      ...reportRoutes
+      ...reportRoutes,
+      ...cityManagementRoutes,
     ],
   },
 ];

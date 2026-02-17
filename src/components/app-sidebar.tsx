@@ -8,19 +8,20 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import {
+  Building2,
   // Briefcase,
   // Building2,
   // CheckCircle2,
   ChevronRight,
   // ClipboardList,
   // Clock,
-  FileText,
+  // FileText,
   LayoutDashboard,
   Map,
   // MapPin,
   // MessageSquare,
   // Timer,
-  // UserCheck,
+  UserCheck,
   UserPlus,
   Users
 } from "lucide-react";
@@ -75,11 +76,30 @@ export function AppSidebar() {
       icon: UserPlus,
     },
     {
-      title: "Reports",
-      description: "System reports & analytics",
-      url: "/report",
-      icon: FileText,
+      title: "Add Caregiver",
+      description: "Add new caregiver",
+      url: "/caregivers",
+      icon: UserCheck,
     },
+    {
+      title: "Authorized vs Billed Hours",
+      description: "Hours utilization",
+      url: "/hours-utilization",
+      icon: UserCheck,
+    },
+    {
+      title: "City Management",
+      description: "Manage cities",
+      url: "/city-management",
+      icon: Building2,
+    },
+
+    // {
+    //   title: "Reports",
+    //   description: "System reports & analytics",
+    //   url: "/report",
+    //   icon: FileText,
+    // },
   ];
 
   if (user?.role === Role.SUPERADMIN) {
@@ -99,17 +119,12 @@ export function AppSidebar() {
       },
       // Add more for superadmin as needed
     ];
-  } 
+  }
   // else if (user?.role === Role.CITYADMIN) {
   //   items = [
   //     ...items,
 
-  //     {
-  //       title: "Add Caregiver",
-  //       description: "Add new caregiver",
-  //       url: "/caregivers",
-  //       icon: UserCheck,
-  //     },
+
   //     {
   //       title: "Authorized vs Billed",
   //       description: "Hours utilization",

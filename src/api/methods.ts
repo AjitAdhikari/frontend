@@ -163,19 +163,3 @@ export const deleteData = async (url: string) => {
     throw error;
   }
 };
-
-// Insurance Provider API methods
-export const getInsuranceProviders = async () =>
-  await fetchData("/api/insurance_provider");
-
-export const getInsuranceProvider = async (id: string) =>
-  await fetchData(`/api/insurance_provider/${id}`);
-
-export const createInsuranceProvider = async (data: any) =>
-  await postData(`/api/insurance_provider`, data);
-
-export const updateInsuranceProvider = async (id: string, data: any) =>
-  await editData(`/api/insurance_provider/${id}`, data);
-
-export const deleteInsuranceProvider = async (id: string) =>
-  await deleteData(`/api/insurance_provider/${id}`);
